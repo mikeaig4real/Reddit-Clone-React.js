@@ -56,12 +56,23 @@ class App extends React.Component {
   }
   handleSubmit (e) {
     const { title ,link ,votes ,articules } = this.state;
-    e.preventDefault()
-    this.setState({
-      title:'',
-      link:'',
-      articules: [...articules,{title:title,link:link,votes:votes}]
-    })
+    if(title && link) {
+      if(articules.filter(articule=> articule.title === title && articule.link === link).length===0) {
+        e.preventDefault()
+          this.setState({
+          title:'',
+          link:'',
+          articules: [...articules,{title:title,link:link,votes:votes}]
+        })
+      } else {
+        alert('Duplicate Entry')
+        this.setState({
+          title:'',
+          link:'',
+          articules: [...articules]
+        })
+      }
+    }
   }
   render () {
    const { title ,link ,articules } = this.state;
@@ -71,14 +82,14 @@ class App extends React.Component {
             <h5>Add a link</h5>
             <div>
               <label for='title'>Title:</label><br></br>
-              <input onChange={this.handleTChange} value={title} type='text' name='title' id='title'></input>
+              <input onChange={this.handleTChange} value={title} type='text' name='title' id='title' required></input>
             </div>
             <div>
               <label for='link'>Link:</label><br></br>
-              <input onChange={this.handleLChange} value={link} type='text' name='link' id='link'></input>
+              <input onChange={this.handleLChange} value={link} type='text' name='link' id='link' required></input>
             </div>
             <div>
-              <button onClick={this.handleSubmit}>Submit link</button>
+              <button type='submit' onClick={this.handleSubmit}>Submit link</button>
             </div>
           </form>
         <div class='articules'>
@@ -101,7 +112,7 @@ class Articule extends React.Component {
       <div className='articule'>
         <div className='points'><h1>{votes}</h1><h2>points</h2></div>
         <div className='info'>
-          <div><h3>{this.props.title}</h3><h4>{`(${link.split('//')[1]})`}</h4></div>
+          <div><h3>{this.props.title}</h3><h4>{`(${link.split('//')[1]||link})`}</h4></div>
           <div className='votebtn'>
             <button onClick={()=>{
               voteUp(title)
