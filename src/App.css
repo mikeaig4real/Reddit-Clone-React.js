@@ -115,6 +115,11 @@ form button:active {
     margin-bottom: 2.5rem;
 }
 
+.articule span {
+    color:red ;
+    cursor: pointer;
+}
+
 .votebtn {
     display: flex;
     flex-direction: row;

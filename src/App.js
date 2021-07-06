@@ -19,6 +19,7 @@ class App extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleVoteup = this.handleVoteup.bind(this);
     this.handleVotedown = this.handleVotedown.bind(this);
+    this.deleteArticule = this.deleteArticule.bind(this);
   }
   handleTChange (e) {
     const { articules } = this.state;
@@ -28,17 +29,27 @@ class App extends React.Component {
       articules: articules
     })
   }
-  handleVoteup (title) {
+  handleVoteup (title,link) {
     const { articules } = this.state;
-    const currArticule = articules.find(articule => articule.title === title)
+    const currArticule = articules.find(articule => articule.title === title && articule.link === link)
     currArticule.votes++;
     this.setState({
       articules:[...articules]
     }) 
   }
-  handleVotedown (title) {
+
+  deleteArticule (title,link) {
     const { articules } = this.state;
-    const currArticule = articules.find(articule => articule.title === title)
+    const currArticule = articules.find(articule => articule.title === title && articule.link === link)
+    const index = articules.indexOf(currArticule);
+    this.setState({
+      articules:[...articules].filter((art,i) => i !==index)
+    }) 
+  }
+
+  handleVotedown (title,link) {
+    const { articules } = this.state;
+    const currArticule = articules.find(articule => articule.title === title && articule.link === link)
     if (currArticule.votes > 0) {
       currArticule.votes--;
     }
@@ -89,12 +100,19 @@ class App extends React.Component {
               <input onChange={this.handleLChange} value={link} type='text' name='link' id='link' required></input>
             </div>
             <div>
-              <button type='submit' onClick={this.handleSubmit}>Submit link</button>
+              <button 
+              type='submit' 
+              onClick={this.handleSubmit}>Submit link</button>
             </div>
           </form>
         <div class='articules'>
-          {articules.sort((a,b) => b.votes - a.votes).map(articule => {
-            return <Articule {...articule} voteUp={this.handleVoteup} voteDown={this.handleVotedown}/>
+          {articules.sort((a,b) => b.votes - a.votes).map((articule,i) => {
+            return <Articule 
+              {...articule} 
+              key={i} 
+              voteUp={this.handleVoteup} 
+              voteDown={this.handleVotedown} 
+              deleteArt={this.deleteArticule}/>
           })}
         </div>
       </div>
@@ -107,7 +125,7 @@ class Articule extends React.Component {
     super(props);
   }
   render () {
-    const { link,votes,title,voteUp,voteDown } = this.props;
+    const { deleteArt,link,votes,title,voteUp,voteDown } = this.props;
     return (
       <div className='articule'>
         <div className='points'><h1>{votes}</h1><h2>points</h2></div>
@@ -115,13 +133,17 @@ class Articule extends React.Component {
           <div><h3>{this.props.title}</h3><h4>{`(${link.split('//')[1]||link})`}</h4></div>
           <div className='votebtn'>
             <button onClick={()=>{
-              voteUp(title)
+              voteUp(title,link)
             }}><i className='fas fa-arrow-circle-up'></i>upvote</button>
             <button onClick={()=>{
-              voteDown(title)
+              voteDown(title,link)
             }}><i className='fas fa-arrow-circle-down'></i>downvote</button>
           </div>
         </div>
+        <span><i onClick={()=> {
+            deleteArt(title,link)
+          }} className='fas fa-minus-circle'></i>
+        </span>
       </div>
     )
   }
