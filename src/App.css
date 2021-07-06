@@ -1,38 +1,136 @@
-.App {
-  text-align: center;
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+form {
+    position: absolute;
+    margin-top: -20rem;
+    display: flex;
+    border: 2px solid rgba(0, 0, 0, 0.138);
+    border-radius: 6px;
+    padding: 8px;
+    flex-direction: column;
+    background-color: rgba(135, 207, 235, 0.296);
+    width: 70vw;
+    height: 40vh;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+form div {
+    display: flex;
+    flex-direction: column;
+    align-items: space-around;
+    margin-bottom: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+form label {
+    font-weight: 600;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+form input, input:active {
+    display: inline-block;
+    margin-top: -18px;
+    width: 100%;
+    border: 2px solid rgba(0, 0, 0, 0.138);
+    border-radius: 6px;
+    outline: none;
+}
+
+form button {
+    width: 100px;
+    height: 30px;
+    text-align: center;
+    align-self: flex-end;
+    color: white;
+    background-color: rgb(10, 184, 10);
+    border: none;
+    font-weight: 600;
+    border-radius: 6px;
+}
+
+form button:hover {
+    background: rgb(7, 123, 7);
+}
+
+form button:active {
+    background: rgb(13, 223, 13);
+    border: 2px solid rgb(207, 216, 207);
+}
+
+.articules {
+    position: absolute;
+    top: 20rem;
+}
+
+.articule {
+    display: flex;
+    flex-direction: row;
+    width: 80vw;
+    margin: 3rem 0 1rem 0;
+    height: 8rem;
+}
+
+.points {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.166);
+    border-radius: 6px;
+    padding: 0 4rem 0 4rem;
+}
+
+.points h1 {
+    font-size: 4rem;
+}
+
+.points h2 {
+    font-weight: 700;
+    margin-top: -9px;
+    font-size: 1rem;
+    text-transform: uppercase;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    padding: 4px 0 4px 10px;
+}
+
+.info div h4 {
+    font-size: small;
+    color:rgba(0, 0, 0, 0.467);
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+}
+
+.votebtn {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.votebtn button {
+    width: 6rem;
+    margin-left: 0.5rem;
+    border: none;
+    background-color: transparent;
+    color: rgb(0, 0, 238);
+    font-weight: bolder;
+}
+
+.votebtn button i {
+    font-weight: bolder;
+    padding-right: 4px;
 }
