@@ -15,7 +15,7 @@
 
 form {
     position: absolute;
-    margin-top: -20rem;
+    margin-top: -50vh;
     display: flex;
     border: 2px solid rgba(0, 0, 0, 0.138);
     border-radius: 6px;
@@ -69,7 +69,7 @@ form button:active {
 
 .articules {
     position: absolute;
-    top: 20rem;
+    top: 50vh;
 }
 
 .articule {
